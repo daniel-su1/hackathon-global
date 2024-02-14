@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 
 const httpLink = new HttpLink({
-    uri: 'https://api.hackthenorth.com/v3/graphql',
+    uri: 'https://corsproxy.io/?https://api.hackthenorth.com/v3/graphql',
 });
 
 const client = new ApolloClient({
