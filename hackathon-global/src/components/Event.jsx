@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import WindowButton from "./WindowButton";
 
 const MotionBox = motion(Box);
 
@@ -75,18 +76,6 @@ function convertUnixTimestamp(timestamp) {
   }
   // console.log(timestamp)
   return `${month} ${day}, ${year} ${hours}:${minutes} ${period}`;
-}
-
-function WindowButton() {
-  return (
-    <Square
-      bg="rgba(255,255,255,0.6)"
-      marginLeft="0.5em"
-      outline="2px solid white"
-      height="10px"
-      width="10px"
-    ></Square>
-  );
 }
 
 function truncateString(str, num) {

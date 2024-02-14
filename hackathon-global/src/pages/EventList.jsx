@@ -1,10 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { SAMPLE_EVENTS_QUERY } from "../graphql/queries";
 import { Link } from "react-router-dom";
-import Event from "../components/Event";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { Box, Center, Input, Text, Flex } from "@chakra-ui/react";
+import Event from "../components/Event";
+import ApplyFilters from "../components/ApplyFilters";
 
 function EventList() {
   const { loading, error, data } = useQuery(SAMPLE_EVENTS_QUERY);
@@ -25,21 +26,6 @@ function EventList() {
     console.log("retrieved from local storage");
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("sortPreference", sortPreference);
-  //   console.log("stored sort in local storage");
-  // }, [sortPreference]);
-
-  // useEffect(() => {
-  //   localStorage.setItem("filters", JSON.stringify(filters));
-  //   console.log("stored filters in local storage");
-  // }, [filters]);
-
-  function handleFilterChange(filter) {
-    const updatedFilters = { ...filters, [filter]: !filters[filter] };
-    setFilters(updatedFilters);
-    localStorage.setItem("filters", JSON.stringify(updatedFilters));
-  }
   function handleSortChange(sort) {
     setSortPreference(sort);
     localStorage.setItem("sortPreference", sort);
@@ -82,34 +68,12 @@ function EventList() {
           placeholder="Search events.."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          border={"2px solid white"}
+          borderRadius="0px"
+          
         ></Input>
+
         <div>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                checked={filters.workshop}
-                onChange={() => handleFilterChange("workshop")}
-              />
-              Workshop
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={filters.activity}
-                onChange={() => handleFilterChange("activity")}
-              />
-              Activity
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={filters.tech_talk}
-                onChange={() => handleFilterChange("tech_talk")}
-              />
-              Tech Talk
-            </label>
-          </div>
           <div>
             <label>
               <input
@@ -118,6 +82,7 @@ function EventList() {
                 value="start_time"
                 checked={sortPreference === "start_time"}
                 onChange={() => handleSortChange("start_time")}
+                
               />
               Start Time
             </label>
@@ -134,10 +99,13 @@ function EventList() {
           </div>
           {/* Search input and event list rendering */}
         </div>
-        <Flex flexDirection="row" flexWrap="wrap">
-        {sortedEvents.map((sampleEvent) => (
-          <Event data={sampleEvent} key={sampleEvent.id} />
-        ))}
+        <Flex flexDirection="row" alignItems="flex-start">
+        <ApplyFilters filters={filters} setFilters={setFilters} />
+          <Flex flexDirection="row" flexWrap="wrap">
+            {sortedEvents.map((sampleEvent) => (
+              <Event data={sampleEvent} key={sampleEvent.id} />
+            ))}
+          </Flex>
         </Flex>
       </Box>
     </Center>
