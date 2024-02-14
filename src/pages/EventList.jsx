@@ -66,7 +66,6 @@ function EventList() {
         <motion.div
           initial={{ width: "30em" }} // Initial width
           animate={{ width: isFocused ? "40em" : "30em" }}
-          // transition={{ type: "spring", stiffness: 300 }}
           transition={{ type: "spring", stiffness: 250 }}
         >
           <Input
