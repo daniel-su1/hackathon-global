@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Event from "../components/Event";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
+import { Box, Center, Input, Text, Flex } from "@chakra-ui/react";
 
 function EventList() {
   const { loading, error, data } = useQuery(SAMPLE_EVENTS_QUERY);
@@ -73,76 +74,73 @@ function EventList() {
     });
 
   return (
-    <div>
-      <h1>Events</h1>
-      <input
-        type="text"
-        placeholder="Search events..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        style={{ marginBottom: "20px" }}
-      />
-      <div>
-        <h1>Events</h1>
+    <Center>
+      <Box width="60em">
+        <Text fontSize="3xl">Events</Text>
+        <Input
+          type="text"
+          placeholder="Search events.."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        ></Input>
         <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={filters.workshop}
-              onChange={() =>
-                handleFilterChange("workshop")
-              }
-            />
-            Workshop
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={filters.activity}
-              onChange={() => handleFilterChange("activity")}
-            />
-            Activity
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={filters.tech_talk}
-              onChange={() =>
-                handleFilterChange("tech_talk")
-              }
-            />
-            Tech Talk
-          </label>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={filters.workshop}
+                onChange={() => handleFilterChange("workshop")}
+              />
+              Workshop
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={filters.activity}
+                onChange={() => handleFilterChange("activity")}
+              />
+              Activity
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={filters.tech_talk}
+                onChange={() => handleFilterChange("tech_talk")}
+              />
+              Tech Talk
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="sortPreference"
+                value="start_time"
+                checked={sortPreference === "start_time"}
+                onChange={() => handleSortChange("start_time")}
+              />
+              Start Time
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="sortPreference"
+                value="name"
+                checked={sortPreference === "name"}
+                onChange={() => handleSortChange("name")}
+              />
+              Name
+            </label>
+          </div>
+          {/* Search input and event list rendering */}
         </div>
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="sortPreference"
-              value="start_time"
-              checked={sortPreference === "start_time"}
-              onChange={() => handleSortChange("start_time")}
-            />
-            Start Time
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="sortPreference"
-              value="name"
-              checked={sortPreference === "name"}
-              onChange={() => handleSortChange("name")}
-            />
-            Name
-          </label>
-        </div>
-        {/* Search input and event list rendering */}
-      </div>
-
-      {sortedEvents.map((sampleEvent) => (
-        <Event data={sampleEvent} key={sampleEvent.id} />
-      ))}
-    </div>
+        <Flex flexDirection="row" flexWrap="wrap">
+        {sortedEvents.map((sampleEvent) => (
+          <Event data={sampleEvent} key={sampleEvent.id} />
+        ))}
+        </Flex>
+      </Box>
+    </Center>
   );
 }
 
