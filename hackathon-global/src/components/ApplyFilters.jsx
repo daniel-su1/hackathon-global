@@ -2,7 +2,6 @@ import { Box, LinkBox, Flex, Text, Stack, Checkbox } from "@chakra-ui/react";
 import WindowButton from "./WindowButton";
 
 function ApplyFilters({ filters, setFilters }) {
-  
   const handleFilterChange = (filter) => () => {
     const updatedFilters = { ...filters, [filter]: !filters[filter] };
     localStorage.setItem("filters", JSON.stringify(updatedFilters));
@@ -32,7 +31,7 @@ function ApplyFilters({ filters, setFilters }) {
       </Box>
       <Box padding="1em">
         <Text fontSize="xl" color="white" mb={3}>
-          Filters
+          Filter By
         </Text>
         <Stack spacing={3} direction="column">
           <Checkbox
@@ -41,25 +40,23 @@ function ApplyFilters({ filters, setFilters }) {
             isChecked={filters.workshop}
             onChange={handleFilterChange("workshop")}
           >
-            Workshop
+            <Text>Workshop</Text>
           </Checkbox>
           <Checkbox
             colorScheme="orange"
             color={"white"}
-            
             isChecked={filters.activity}
             onChange={handleFilterChange("activity")}
           >
-            Activity
+            <Text>Activity</Text>
           </Checkbox>
           <Checkbox
             colorScheme="cyan"
             color={"white"}
-            
             isChecked={filters.tech_talk}
             onChange={handleFilterChange("tech_talk")}
           >
-            Tech Talk
+            <Text>Tech Talk</Text>
           </Checkbox>
         </Stack>
       </Box>

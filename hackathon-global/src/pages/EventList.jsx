@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { Box, Center, Input, Text, Flex } from "@chakra-ui/react";
+import { motion, AnimatePresence } from "framer-motion";
 import Event from "../components/Event";
 import ApplyFilters from "../components/ApplyFilters";
+import SortBy from "../components/SortBy";
 
 function EventList() {
   const { loading, error, data } = useQuery(SAMPLE_EVENTS_QUERY);
@@ -17,6 +19,7 @@ function EventList() {
     tech_talk: false,
   });
   const [sortPreference, setSortPreference] = useState("start_time");
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     const storedFilters = JSON.parse(localStorage.getItem("filters"));
@@ -25,11 +28,6 @@ function EventList() {
     if (storedSortPreference) setSortPreference(storedSortPreference);
     console.log("retrieved from local storage");
   }, []);
-
-  function handleSortChange(sort) {
-    setSortPreference(sort);
-    localStorage.setItem("sortPreference", sort);
-  }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
@@ -61,53 +59,61 @@ function EventList() {
 
   return (
     <Center>
-      <Box width="60em">
-        <Text fontSize="3xl">Events</Text>
-        <Input
-          type="text"
-          placeholder="Search events.."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          border={"2px solid white"}
-          borderRadius="0px"
-          
-        ></Input>
-
-        <div>
-          <div>
-            <label>
-              <input
-                type="radio"
-                name="sortPreference"
-                value="start_time"
-                checked={sortPreference === "start_time"}
-                onChange={() => handleSortChange("start_time")}
-                
-              />
-              Start Time
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="sortPreference"
-                value="name"
-                checked={sortPreference === "name"}
-                onChange={() => handleSortChange("name")}
-              />
-              Name
-            </label>
-          </div>
-          {/* Search input and event list rendering */}
-        </div>
+      <Flex width="60em" flexDir="column">
+        <Text fontSize="60pt" fontWeight="500" mb={5}>
+          Events
+        </Text>
+        <motion.div
+          initial={{ width: "30em" }} // Initial width
+          animate={{ width: isFocused ? "40em" : "30em" }}
+          // transition={{ type: "spring", stiffness: 300 }}
+          transition={{ type: "spring", stiffness: 150 }}
+        >
+          <Input
+            as={motion.input}
+            type="text"
+            placeholder="Search events.."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            border={"2px solid white"}
+            borderRadius="0px"
+            mb={3}
+            ml={4}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+          ></Input>
+        </motion.div>
         <Flex flexDirection="row" alignItems="flex-start">
-        <ApplyFilters filters={filters} setFilters={setFilters} />
-          <Flex flexDirection="row" flexWrap="wrap">
-            {sortedEvents.map((sampleEvent) => (
-              <Event data={sampleEvent} key={sampleEvent.id} />
-            ))}
+          <Flex flexDirection="column">
+            <ApplyFilters filters={filters} setFilters={setFilters} />
+            <SortBy
+              sortPreference={sortPreference}
+              setSortPreference={setSortPreference}
+            />
           </Flex>
+          <AnimatePresence>
+            <Flex
+              flexDirection="row"
+              flexWrap="wrap"
+              m="auto"
+              as={motion.div}
+              layout
+            >
+              {sortedEvents.map((sampleEvent) => (
+                <motion.div
+                  key={sampleEvent.id}
+                  layout
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                >
+                  <Event data={sampleEvent} key={sampleEvent.id} />
+                </motion.div>
+              ))}
+            </Flex>
+          </AnimatePresence>
         </Flex>
-      </Box>
+      </Flex>
     </Center>
   );
 }
