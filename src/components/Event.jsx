@@ -14,51 +14,14 @@ import { useState } from "react";
 import WindowButton from "./WindowButton";
 import {formatDate, formatTime} from "../utils/convertUnixTimestamp";
 import truncateString from "../utils/truncateString";
+import getEventColorScheme from "../utils/colorManagement";
 
 const MotionBox = motion(Box);
 
 function Event({ data, setFilters }) {
   const [isHovered, setIsHovered] = useState(false);
-  let bgGradient;
-  let accentGradient;
-  let tagColor;
-  let startingColor;
-  let endingColor;
-  let eventType;
-
-  switch (data.event_type) {
-    case "workshop":
-      bgGradient = "linear-gradient(90deg, rgb(23, 50, 81), rgb(43, 37, 80))";
-      startingColor = "rgb(31, 166, 255)";
-      endingColor = "rgb(137, 107, 255)";
-      tagColor = "rgba(31, 166, 255, 0.6)";
-      break;
-    case "activity":
-      bgGradient = "linear-gradient(90deg, rgb(64, 45, 43), rgb(67, 25, 80))";
-      startingColor = "rgb(240, 147, 68)";
-      endingColor = "rgb(255, 44, 251)";
-      tagColor = "rgba(240, 147, 68, 0.6)";
-      break;
-    default:
-      bgGradient = "linear-gradient(90deg,  rgb(63, 57, 48), rgb(42, 65, 80))";
-      startingColor = "rgb(247, 206, 88)";
-      endingColor = "rgb(25, 251, 255)";
-      tagColor = "rgba(247, 206, 88, 0.6)";
-      break;
-  }
-  accentGradient = `linear-gradient(90deg, ${startingColor}, ${endingColor})`;
-  switch (data.event_type) {
-    case "workshop":
-      eventType = "Workshop";
-      break;
-    case "activity":
-      eventType = "Activity";
-      break;
-    default:
-      eventType = "Tech Talk";
-      break;
-  }
-
+  const { bgGradient, accentGradient, tagColor, eventType } = getEventColorScheme(data.event_type);
+  
   const hoverAnimation = {
     hover: {
       filter: "blur(20px)",

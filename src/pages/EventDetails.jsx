@@ -23,17 +23,12 @@ import { formatDate, formatTime } from "../utils/convertUnixTimestamp";
 import Event from "../components/Event";
 import RelatedEvent from "../components/RelatedEvent";
 import LoadingSpinner from "../components/LoadingSpinner";
+import getEventColorScheme from "../utils/colorManagement";
 
 
 function EventDetails() {
   const { id } = useParams();
   const { isLoggedIn } = useAuth();
-  let bgGradient;
-  let accentGradient;
-  let startingColor;
-  let endingColor;
-  let tagColor;
-  let eventType;
 
   const { loading, error, data } = useQuery(GET_EVENT_BY_ID, {
     variables: { id: id * 1.0 },
@@ -49,58 +44,8 @@ function EventDetails() {
   if (error) return <p>Error: {error.message}</p>;
 
   const eventDetails = data.sampleEvent;
+  const { bgGradient, accentGradient, tagColor, eventType, startingColorTransparent, endingColorTransparent } = getEventColorScheme(eventDetails.event_type);
 
-  console.log(eventDetails);
-  console.log(isLoggedIn);
-  switch (eventDetails.event_type) {
-    case "workshop":
-      bgGradient = "linear-gradient(90deg, rgb(23, 50, 81), rgb(43, 37, 80))";
-      startingColor = "rgb(31, 166, 255)";
-      endingColor = "rgb(137, 107, 255)";
-      tagColor = "rgba(31, 166, 255, 0.6)";
-      break;
-    case "activity":
-      bgGradient = "linear-gradient(90deg, rgb(64, 45, 43), rgb(67, 25, 80))";
-      startingColor = "rgb(240, 147, 68)";
-      endingColor = "rgb(255, 44, 251)";
-      tagColor = "rgba(240, 147, 68, 0.6)";
-      break;
-    default:
-      bgGradient = "linear-gradient(90deg,  rgb(63, 57, 48), rgb(42, 65, 80))";
-      startingColor = "rgb(247, 206, 88)";
-      endingColor = "rgb(25, 251, 255)";
-      tagColor = "rgba(247, 206, 88, 0.6)";
-      break;
-  }
-  accentGradient = `linear-gradient(90deg, ${startingColor}, ${endingColor})`;
-  let startingColorTransparent = startingColor
-    .replace("rgb", "rgba")
-    .replace(
-      ")",
-      ", " + (eventDetails.event_type === "tech_talk" ? "0.6)" : "0.75)")
-    );
-  let endingColorTransparent = endingColor
-    .replace("rgb", "rgba")
-    .replace(
-      ")",
-      ", " + (eventDetails.event_type === "tech_talk" ? "0.6)" : "0.75)")
-    );
-
-  switch (eventDetails.event_type) {
-    case "workshop":
-      eventType = "Workshop";
-      break;
-    case "activity":
-      eventType = "Activity";
-      break;
-    default:
-      eventType = "Tech Talk";
-      break;
-  }
-  eventDetails.related_events.map((id) => {
-
-  console.log(id);
-  });
   return (
     <Center>
       <VStack>
