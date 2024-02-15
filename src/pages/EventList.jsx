@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client";
 import { SAMPLE_EVENTS_QUERY } from "../graphql/queries";
-import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { Box, Center, Input, Text, Flex } from "@chakra-ui/react";

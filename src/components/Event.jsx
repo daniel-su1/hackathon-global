@@ -12,8 +12,8 @@ import {
 import { motion } from "framer-motion";
 import { useState } from "react";
 import WindowButton from "./WindowButton";
-import { convertUnixTimestamp } from "../utils/convertUnixTimestamp";
-import { truncateString } from "../utils/truncateString";
+import {formatDate, formatTime} from "../utils/convertUnixTimestamp";
+import truncateString from "../utils/truncateString";
 
 const MotionBox = motion(Box);
 
@@ -23,14 +23,6 @@ function Event({ data, setFilters }) {
   let accentGradient;
   let tagOriginalColor;
   let eventType;
-
-  const handleTagClick = (e, eventType) => {
-    e.stopPropagation(); // Prevent click from propagating to the LinkBox
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [eventType]: !prevFilters[eventType],
-    }));
-  };
 
   switch (data.event_type) {
     case "workshop":
@@ -86,6 +78,7 @@ function Event({ data, setFilters }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       margin="1em"
+      id={data.id}
     >
       <MotionBox
         zIndex="-1"
@@ -117,7 +110,7 @@ function Event({ data, setFilters }) {
             </Text>
           ))}
         </Box>
-        <Text mb="3">{convertUnixTimestamp(data.start_time)}</Text>
+        <Text mb="3">{formatDate(data.start_time) + " " + formatTime(data.start_time) + " - " + formatTime(data.end_time)}</Text>
 
         <Text mb="3" color="rgba(255, 255, 255, 0.6)">
           {truncateString(data.description, 175)}

@@ -30,6 +30,12 @@ export const GET_EVENT_BY_ID = gql`
       start_time
       end_time
       description
+      speakers {
+        name
+      }
+      public_url
+      private_url
+      related_events
     }
   }
 `;

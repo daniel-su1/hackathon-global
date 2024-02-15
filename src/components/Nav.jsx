@@ -65,7 +65,7 @@ function NavBox({ children, link, mobile }) {
   );
 }
 
-export default function Simple() {
+export default function nav() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const location = useLocation();
   const { isLoggedIn } = useAuth();
