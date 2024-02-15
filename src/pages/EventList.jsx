@@ -58,7 +58,7 @@ function EventList() {
     });
 
   return (
-    <Center>
+    <Center px={8}>
       <Flex width="60em" flexDir="column">
         <Text fontSize="60pt" fontWeight="500" mb={5}>
           Events
@@ -80,6 +80,9 @@ function EventList() {
             ml={4}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
+            bg= "gray.200"
+
+            
           ></Input>
         </motion.div>
         <Flex flexDirection="row" alignItems="flex-start">
