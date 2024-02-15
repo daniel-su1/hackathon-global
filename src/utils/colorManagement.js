@@ -1,4 +1,4 @@
-const getEventColorScheme = (eventType) => {
+const getColorScheme = (eventType) => {
   let colorScheme = {
     bgGradient: "linear-gradient(90deg,  rgb(63, 57, 48), rgb(42, 65, 80))", // Default background gradient
     startingColor: "rgb(247, 206, 88)", // Default starting color
@@ -44,4 +44,4 @@ const getEventColorScheme = (eventType) => {
   return colorScheme;
 };
 
-export default getEventColorScheme;
+export default getColorScheme;

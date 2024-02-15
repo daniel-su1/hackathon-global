@@ -14,13 +14,13 @@ import { useState } from "react";
 import WindowButton from "./WindowButton";
 import {formatDate, formatTime} from "../utils/convertUnixTimestamp";
 import truncateString from "../utils/truncateString";
-import getEventColorScheme from "../utils/colorManagement";
+import getColorScheme from "../utils/colorManagement";
 
 const MotionBox = motion(Box);
 
 function Event({ data, setFilters }) {
   const [isHovered, setIsHovered] = useState(false);
-  const { bgGradient, accentGradient, tagColor, eventType } = getEventColorScheme(data.event_type);
+  const { bgGradient, accentGradient, tagColor, eventType } = getColorScheme(data.event_type);
   
   const hoverAnimation = {
     hover: {

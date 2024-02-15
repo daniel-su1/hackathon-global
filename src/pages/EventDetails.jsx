@@ -20,10 +20,9 @@ import {
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import WindowButton from "../components/WindowButton";
 import { formatDate, formatTime } from "../utils/convertUnixTimestamp";
-import Event from "../components/Event";
 import RelatedEvent from "../components/RelatedEvent";
 import LoadingSpinner from "../components/LoadingSpinner";
-import getEventColorScheme from "../utils/colorManagement";
+import getColorScheme from "../utils/colorManagement";
 
 
 function EventDetails() {
@@ -44,7 +43,7 @@ function EventDetails() {
   if (error) return <p>Error: {error.message}</p>;
 
   const eventDetails = data.sampleEvent;
-  const { bgGradient, accentGradient, tagColor, eventType, startingColorTransparent, endingColorTransparent } = getEventColorScheme(eventDetails.event_type);
+  const { bgGradient, accentGradient, tagColor, eventType, startingColorTransparent, endingColorTransparent } = getColorScheme(eventDetails.event_type);
 
   return (
     <Center>
