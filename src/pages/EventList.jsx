@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Event from "../components/Event";
 import ApplyFilters from "../components/ApplyFilters";
 import SortBy from "../components/SortBy";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function EventList() {
   const { loading, error, data } = useQuery(SAMPLE_EVENTS_QUERY);
@@ -28,7 +29,7 @@ function EventList() {
     console.log("retrieved from local storage");
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingSpinner/>
   if (error) return <p>Error :</p>;
   // console.log(data.sampleEvents);
 

@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Link as RouterLink, useParams, useNavigate } from "react-router-dom";
-import { GET_EVENT_BY_ID } from "../graphql/queries"; // Adjust the path as needed
+import { GET_EVENT_BY_ID } from "../graphql/queries"; 
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
@@ -15,11 +15,14 @@ import {
   HStack,
   Center,
   IconButton,
+  VStack
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import WindowButton from "../components/WindowButton";
 import { formatDate, formatTime } from "../utils/convertUnixTimestamp";
 import Event from "../components/Event";
+import RelatedEvent from "../components/RelatedEvent";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 
 function EventDetails() {
@@ -39,10 +42,10 @@ function EventDetails() {
   const navigate = useNavigate();
 
   const handleBackButtonClick = () => {
-    navigate(-1);
+    navigate("/events");
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingSpinner/>;
   if (error) return <p>Error: {error.message}</p>;
 
   const eventDetails = data.sampleEvent;
@@ -94,9 +97,13 @@ function EventDetails() {
       eventType = "Tech Talk";
       break;
   }
+  eventDetails.related_events.map((id) => {
 
+  console.log(id);
+  });
   return (
     <Center>
+      <VStack>
       <LinkBox
         as="article"
         maxW="40em"
@@ -189,6 +196,12 @@ function EventDetails() {
           </Tag>
         </Box>
       </LinkBox>
+      <HStack>
+        {eventDetails.related_events.map((id) => (
+          <RelatedEvent id={id} />
+        ))}
+      </HStack>
+      </VStack>
     </Center>
   );
 }
