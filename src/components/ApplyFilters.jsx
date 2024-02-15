@@ -51,7 +51,7 @@ function ApplyFilters({ filters, setFilters }) {
             <Text>Activity</Text>
           </Checkbox>
           <Checkbox
-            colorScheme="cyan"
+            colorScheme="yellow"
             color={"white"}
             isChecked={filters.tech_talk}
             onChange={handleFilterChange("tech_talk")}

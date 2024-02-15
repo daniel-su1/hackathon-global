@@ -21,29 +21,32 @@ function Event({ data, setFilters }) {
   const [isHovered, setIsHovered] = useState(false);
   let bgGradient;
   let accentGradient;
-  let tagOriginalColor;
+  let tagColor;
+  let startingColor;
+  let endingColor;
   let eventType;
 
   switch (data.event_type) {
     case "workshop":
       bgGradient = "linear-gradient(90deg, rgb(23, 50, 81), rgb(43, 37, 80))";
-      accentGradient =
-        "linear-gradient(90deg, rgb(31, 166, 255), rgb(137, 107, 255))";
-      tagOriginalColor = "rgba(31, 166, 255, 0.6)";
+      startingColor = "rgb(31, 166, 255)";
+      endingColor = "rgb(137, 107, 255)";
+      tagColor = "rgba(31, 166, 255, 0.6)";
       break;
     case "activity":
       bgGradient = "linear-gradient(90deg, rgb(64, 45, 43), rgb(67, 25, 80))";
-      accentGradient =
-        "linear-gradient(90deg, rgb(240, 147, 68), rgb(255, 44, 251))";
-      tagOriginalColor = "rgba(240, 147, 68, 0.6)";
+      startingColor = "rgb(240, 147, 68)";
+      endingColor = "rgb(255, 44, 251)";
+      tagColor = "rgba(240, 147, 68, 0.6)";
       break;
     default:
-      bgGradient = "linear-gradient(90deg,  rgb(21, 66, 81), rgb(22, 49, 81))";
-      accentGradient =
-        "linear-gradient(90deg, rgb(25, 251, 255), rgb(31, 166, 255))";
-      tagOriginalColor = "rgba(25, 251, 255, 0.6)";
+      bgGradient = "linear-gradient(90deg,  rgb(63, 57, 48), rgb(42, 65, 80))";
+      startingColor = "rgb(247, 206, 88)";
+      endingColor = "rgb(25, 251, 255)";
+      tagColor = "rgba(247, 206, 88, 0.6)";
       break;
   }
+  accentGradient = `linear-gradient(90deg, ${startingColor}, ${endingColor})`;
   switch (data.event_type) {
     case "workshop":
       eventType = "Workshop";
@@ -118,7 +121,7 @@ function Event({ data, setFilters }) {
         <Tag
           size="md"
           variant="solid"
-          bg={tagOriginalColor}
+          bg={tagColor}
           borderRadius="full"
         >
           {eventType}

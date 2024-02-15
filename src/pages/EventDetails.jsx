@@ -66,10 +66,10 @@ function EventDetails() {
       tagColor = "rgba(240, 147, 68, 0.6)";
       break;
     default:
-      bgGradient = "linear-gradient(90deg,  rgb(21, 66, 81), rgb(22, 49, 81))";
-      startingColor = "rgb(25, 251, 255)";
-      endingColor = "rgb(31, 166, 255)";
-      tagColor = "rgba(25, 251, 255, 0.6)";
+      bgGradient = "linear-gradient(90deg,  rgb(63, 57, 48), rgb(42, 65, 80))";
+      startingColor = "rgb(247, 206, 88)";
+      endingColor = "rgb(25, 251, 255)";
+      tagColor = "rgba(247, 206, 88, 0.6)";
       break;
   }
   accentGradient = `linear-gradient(90deg, ${startingColor}, ${endingColor})`;
