@@ -42,7 +42,7 @@ function Login() {
     //   <button type="submit">Login</button>
     // </form>
 
-    <Center>
+    <Center mt={"10%"}>
       <Window
         bgGradient={"linear-gradient(90deg, rgb(23, 50, 81), rgb(43, 37, 80))"}
         accentGradient={
@@ -57,8 +57,9 @@ function Login() {
             <Box>
               <VStack m="auto">
                 <FormControl isRequired>
-                  <FormLabel htmlFor="username">Username</FormLabel>
+                  <FormLabel color={"gray.300"} htmlFor="username">Username</FormLabel>
                   <Input
+                  border={"2px solid white"}
                     id="username"
                     type="text"
                     value={username}
@@ -68,8 +69,9 @@ function Login() {
                   ></Input>
                 </FormControl>
                 <FormControl isRequired>
-                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <FormLabel color={"gray.300"} htmlFor="password">Password</FormLabel>
                   <Input
+                  border={"2px solid white"}
                     id="password"
                     type="password"
                     value={password}
