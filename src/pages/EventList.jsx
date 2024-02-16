@@ -86,7 +86,7 @@ function EventList() {
           ></Input>
         </motion.div>
         <Flex flexDirection={{base: "column",sm: "column", md: "row"}} alignItems="flex-start">
-          <Flex flexDirection={"column"} width={{base: "100%", sm:"100%", md:"20em"}}>
+          <Flex flexDirection={"column"} width={{base: "100%", sm:"100%", md:"10em"}}>
             <ApplyFilters filters={filters} setFilters={setFilters} />
             <SortBy
               sortPreference={sortPreference}
