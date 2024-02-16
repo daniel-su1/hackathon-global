@@ -64,8 +64,8 @@ function EventList() {
           Events
         </Text>
         <motion.div
-          initial={{ width: "30em" }} // Initial width
-          animate={{ width: isFocused ? "40em" : "30em" }}
+          initial={{ width: "50%" }} // Initial width
+          animate={{ width: isFocused ? "85%" : "50%" }}
           transition={{ type: "spring", stiffness: 250 }}
         >
           <Input
@@ -85,8 +85,8 @@ function EventList() {
             
           ></Input>
         </motion.div>
-        <Flex flexDirection="row" alignItems="flex-start">
-          <Flex flexDirection="column">
+        <Flex flexDirection={{base: "column",sm: "column", md: "row"}} alignItems="flex-start">
+          <Flex flexDirection={"column"} width={{base: "100%", sm:"100%", md:"20em"}}>
             <ApplyFilters filters={filters} setFilters={setFilters} />
             <SortBy
               sortPreference={sortPreference}

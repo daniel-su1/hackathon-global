@@ -8,7 +8,10 @@ import {
   FormLabel,
   Input,
   VStack,
+  Text,
+  Center,
 } from "@chakra-ui/react";
+import Window from "../components/Window";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -39,35 +42,61 @@ function Login() {
     //   <button type="submit">Login</button>
     // </form>
 
-    <Box>
-      <form onSubmit={handleSubmit}>
-        <Box >
-          <VStack maxWidth="40em" m="auto">
-            <FormControl isRequired>
-              <FormLabel htmlFor="username">Username</FormLabel>
-              <Input
-                id="username"
-                type="text"
-                value={username}
-                placeholder="username"
-                onChange={(e) => setUsername(e.target.value)}
-              ></Input>
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                placeholder="password"
-                onChange={(e) => setPassword(e.target.value)}
-              ></Input>
-            </FormControl>
-            <Button type="submit">Login</Button>
-          </VStack>
+    <Center>
+      <Window
+        bgGradient={"linear-gradient(90deg, rgb(23, 50, 81), rgb(43, 37, 80))"}
+        accentGradient={
+          "linear-gradient(90deg, rgb(31, 166, 255), rgb(137, 107, 255))"
+        }
+      >
+        <Box width={{ md: "30em" }} p={3}>
+          <Text fontSize={"3xl"} fontWeight={600} mt={0} mb={3}>
+            Login
+          </Text>
+          <form onSubmit={handleSubmit}>
+            <Box>
+              <VStack m="auto">
+                <FormControl isRequired>
+                  <FormLabel htmlFor="username">Username</FormLabel>
+                  <Input
+                    id="username"
+                    type="text"
+                    value={username}
+                    placeholder="htn"
+                    onChange={(e) => setUsername(e.target.value)}
+                    borderRadius={0}
+                  ></Input>
+                </FormControl>
+                <FormControl isRequired>
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    placeholder="12345"
+                    onChange={(e) => setPassword(e.target.value)}
+                    borderRadius={0}
+                  ></Input>
+                </FormControl>
+                <Button
+                  type="submit"
+                  borderRadius={0}
+                  bg={
+                    "linear-gradient(90deg, rgba(31, 166, 255, 0.6), rgba(137, 107, 255, 0.6))"
+                  }
+                  _hover={{
+                    bg: "linear-gradient(90deg, rgba(31, 166, 255, 1), rgba(137, 107, 255, 1))",
+                  }}
+                  border={"2px solid white"}
+                >
+                  <Text>Login</Text>
+                </Button>
+              </VStack>
+            </Box>
+          </form>
         </Box>
-      </form>
-    </Box>
+      </Window>
+    </Center>
   );
 }
 

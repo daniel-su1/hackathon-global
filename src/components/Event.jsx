@@ -36,7 +36,7 @@ function Event({ data, setFilters }) {
   return (
     <LinkBox
       as="article"
-      maxW="20em"
+      maxW={{base: "100%", md: "14em", lg: "20em"}}
       p="5"
       borderWidth="2px"
       bg={bgGradient}
