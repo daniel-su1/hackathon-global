@@ -78,7 +78,7 @@ function Home() {
                   <Text fontSize={"4xl"} fontWeight={600}>
                     Sounds Good?
                   </Text>
-                  <Text>
+                  <Text fontSize={"lg"} fontWeight={350}>
                     Create an account or login to gain exclusive access to our
                     private events! Want to browse Workshops and Tech Talks?
                     Access them now for FREE!

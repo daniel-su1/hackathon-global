@@ -10,12 +10,16 @@ import {
   VStack,
   Text,
   Center,
+  useToast
 } from "@chakra-ui/react";
+
 import Window from "../components/Window";
+
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const toast = useToast();
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -23,25 +27,20 @@ function Login() {
     event.preventDefault();
     if (username === "htn" && password === "12345") {
       login();
-      navigate("/events");
+      navigate(-1);
+      toast({
+        title: "Successfully logged in!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
     } else {
       alert("Invalid username or password");
     }
   };
 
   return (
-    // <form onSubmit={handleSubmit}>
-    //   <label>
-    //     Username:
-    //     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-    //   </label>
-    //   <label>
-    //     Password:
-    //     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-    //   </label>
-    //   <button type="submit">Login</button>
-    // </form>
-
     <Center mt={"10%"}>
       <Window
         bgGradient={"linear-gradient(90deg, rgb(23, 50, 81), rgb(43, 37, 80))"}

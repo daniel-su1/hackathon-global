@@ -1,7 +1,9 @@
 import { Box, LinkBox, Flex, Text, Stack, Checkbox } from "@chakra-ui/react";
 import WindowButton from "./WindowButton";
+import { useAuth } from "../context/AuthContext";
 
 function ApplyFilters({ filters, setFilters }) {
+  const { isLoggedIn } = useAuth();
   const handleFilterChange = (filter) => () => {
     const updatedFilters = { ...filters, [filter]: !filters[filter] };
     localStorage.setItem("filters", JSON.stringify(updatedFilters));
@@ -58,6 +60,16 @@ function ApplyFilters({ filters, setFilters }) {
           >
             <Text>Tech Talk</Text>
           </Checkbox>
+          {isLoggedIn && (
+            <Checkbox
+              colorScheme="red"
+              color={"white"}
+              isChecked={filters.saved}
+              onChange={handleFilterChange("saved")}
+            >
+              <Text>Saved</Text>
+            </Checkbox>
+          )}
         </Stack>
       </Box>
     </Box>

@@ -17,21 +17,24 @@ function EventList() {
     workshop: false,
     activity: false,
     tech_talk: false,
+    saved: false,
   });
   const [sortPreference, setSortPreference] = useState("start_time");
   const [isFocused, setIsFocused] = useState(false);
+  const [savedEvents, setSavedEvents] = useState([]);
 
   useEffect(() => {
     const storedFilters = JSON.parse(localStorage.getItem("filters"));
     if (storedFilters) setFilters(storedFilters);
     const storedSortPreference = localStorage.getItem("sortPreference");
     if (storedSortPreference) setSortPreference(storedSortPreference);
-    console.log("retrieved from local storage");
+    const saved = JSON.parse(localStorage.getItem("savedEvents"));
+    if (saved) setSavedEvents(saved);
+    if (!isLoggedIn) setFilters({ ...filters, saved: false });
   }, []);
 
-  if (loading) return <LoadingSpinner/>
+  if (loading) return <LoadingSpinner />;
   if (error) return <p>Error :</p>;
-  // console.log(data.sampleEvents);
 
   let sortedEvents = data.sampleEvents
     .filter(
@@ -43,8 +46,12 @@ function EventList() {
     )
     .filter((event) => {
       if (filters.workshop && event.event_type === "workshop") return true;
+
       if (filters.activity && event.event_type === "activity") return true;
       if (filters.tech_talk && event.event_type === "tech_talk") return true;
+      if (filters.saved) {
+        return savedEvents.includes(event.id.toString());
+      }
       if (!filters.workshop && !filters.activity && !filters.tech_talk)
         return true;
       return false;
@@ -80,13 +87,17 @@ function EventList() {
             ml={4}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            bg= "gray.200"
-
-            
+            bg="gray.200"
           ></Input>
         </motion.div>
-        <Flex flexDirection={{base: "column",sm: "column", md: "row"}} alignItems="flex-start">
-          <Flex flexDirection={"column"} width={{base: "100%", sm:"100%", md:"10em"}}>
+        <Flex
+          flexDirection={{ base: "column", sm: "column", md: "row" }}
+          alignItems="flex-start"
+        >
+          <Flex
+            flexDirection={"column"}
+            width={{ base: "100%", sm: "100%", md: "10em" }}
+          >
             <ApplyFilters filters={filters} setFilters={setFilters} />
             <SortBy
               sortPreference={sortPreference}

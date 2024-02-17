@@ -2,7 +2,7 @@ import { Box, Flex, LinkBox } from "@chakra-ui/react";
 import WindowButton from "./WindowButton";
 import getColorScheme from "../utils/colorManagement";
 
-function Window({children, bgGradient, accentGradient, startingColorTransparent, endingColorTransparent}) {
+function Window({children, bgGradient, accentGradient}) {
 
     return <LinkBox
     as="article"
