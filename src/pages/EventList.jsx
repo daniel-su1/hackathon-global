@@ -67,7 +67,11 @@ function EventList() {
   return (
     <Center px={8}>
       <Flex width="60em" flexDir="column">
-        <Text fontSize="60pt" fontWeight="500" mb={5}>
+        <Text
+          fontSize={{ base: "30pt", sm: "40pt", md: "50pt", lg: "60pt" }}
+          fontWeight="500"
+          mb={5}
+        >
           Events
         </Text>
         <motion.div
@@ -95,14 +99,19 @@ function EventList() {
           alignItems="flex-start"
         >
           <Flex
-            flexDirection={"column"}
-            width={{ base: "100%", sm: "100%", md: "10em" }}
+            flexDirection={{ base: "row", md: "column" }}
+            width={{ base: "100%", md: "10em" }}
           >
-            <ApplyFilters filters={filters} setFilters={setFilters} />
+            <Box width={{base: "50%", md:"auto"}}>
+              <ApplyFilters filters={filters} setFilters={setFilters} />
+            </Box>
+            <Box width={{base: "50%", md:"auto"}}>
             <SortBy
               sortPreference={sortPreference}
               setSortPreference={setSortPreference}
             />
+            </Box>
+            
           </Flex>
           <AnimatePresence>
             <Flex
