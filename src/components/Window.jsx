@@ -11,7 +11,7 @@ function Window({children, bgGradient, accentGradient}) {
     borderWidth="2px"
     bg={bgGradient}
     padding="0"
-    margin="1em"
+    margin="0"
   >
     <Box
       zIndex="-1"

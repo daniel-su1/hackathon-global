@@ -109,7 +109,7 @@ export default function nav() {
             <Text color="gray.400" mx={3} fontSize="md">
               {isLoggedIn ? <Message /> : " "}
             </Text>
-            {isLoggedIn ? <Avatar size={"md"} src={profile} /> : null}
+            <Avatar size={"md"} src={profile} visibility={isLoggedIn ? "visible" : "hidden"}/>
           </Menu>
         </Flex>
       </Flex>
