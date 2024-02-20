@@ -52,6 +52,7 @@ const theme = extendTheme({
         color: "text.dark.white",
       },
     },
+    
     // Define other components here as needed, following the same pattern.
   },
   styles: {

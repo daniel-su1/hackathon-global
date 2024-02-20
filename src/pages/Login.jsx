@@ -10,12 +10,20 @@ import {
   VStack,
   Text,
   Center,
+  useToast,
+  Image
 } from "@chakra-ui/react";
+import animatedFrame from "../assets/animatedFrame.svg";
+import animatedFrameSmall from "../assets/animatedFrameSmall.svg";
+import animatedFrameLarge from "../assets/animatedFrameLarge.svg";
+import animatedFrameMedium from "../assets/animatedFrameMedium.svg";
 import Window from "../components/Window";
+
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const toast = useToast();
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -23,26 +31,22 @@ function Login() {
     event.preventDefault();
     if (username === "htn" && password === "12345") {
       login();
-      navigate("/events");
+      navigate(-1);
+      toast({
+        title: "Successfully logged in!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
     } else {
       alert("Invalid username or password");
     }
   };
 
   return (
-    // <form onSubmit={handleSubmit}>
-    //   <label>
-    //     Username:
-    //     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-    //   </label>
-    //   <label>
-    //     Password:
-    //     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-    //   </label>
-    //   <button type="submit">Login</button>
-    // </form>
-
-    <Center mt={"10%"}>
+    <VStack height={"calc(100vh - 84px)"} justifyContent={"space-between"}>
+    <Center mt={"8vh"}>
       <Window
         bgGradient={"linear-gradient(90deg, rgb(23, 50, 81), rgb(43, 37, 80))"}
         accentGradient={
@@ -99,6 +103,11 @@ function Login() {
         </Box>
       </Window>
     </Center>
+    <Image src={animatedFrameMedium} display={{base:"none", md:"block", lg:"none"}}></Image>
+    <Image src={animatedFrameSmall} display={{md:"none"}}></Image>
+    <Image src={animatedFrame} display={{base:"none", lg:"block", xl:"none"}}></Image>
+    <Image src={animatedFrameLarge} display={{base:"none", xl:"block"}}></Image>
+    </VStack>
   );
 }
 
