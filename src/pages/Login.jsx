@@ -10,9 +10,13 @@ import {
   VStack,
   Text,
   Center,
-  useToast
+  useToast,
+  Image
 } from "@chakra-ui/react";
-
+import animatedFrame from "../assets/animatedFrame.svg";
+import animatedFrameSmall from "../assets/animatedFrameSmall.svg";
+import animatedFrameLarge from "../assets/animatedFrameLarge.svg";
+import animatedFrameMedium from "../assets/animatedFrameMedium.svg";
 import Window from "../components/Window";
 
 
@@ -41,7 +45,8 @@ function Login() {
   };
 
   return (
-    <Center mt={"10%"}>
+    <VStack height={"calc(100vh - 84px)"} justifyContent={"space-between"}>
+    <Center mt={"8vh"}>
       <Window
         bgGradient={"linear-gradient(90deg, rgb(23, 50, 81), rgb(43, 37, 80))"}
         accentGradient={
@@ -98,6 +103,11 @@ function Login() {
         </Box>
       </Window>
     </Center>
+    <Image src={animatedFrameMedium} display={{base:"none", md:"block", lg:"none"}}></Image>
+    <Image src={animatedFrameSmall} display={{md:"none"}}></Image>
+    <Image src={animatedFrame} display={{base:"none", lg:"block", xl:"none"}}></Image>
+    <Image src={animatedFrameLarge} display={{base:"none", xl:"block"}}></Image>
+    </VStack>
   );
 }
 

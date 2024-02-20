@@ -8,10 +8,6 @@ import {
   IconButton,
   Button,
   Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
   useDisclosure,
   Text,
   Stack,
@@ -71,7 +67,7 @@ export default function nav() {
   const { isLoggedIn } = useAuth();
 
   return (
-    <Box px={{base: "2", md: "08"}} pt={5} maxWidth="70em" margin="auto">
+    <Box px={{base: "2em", md: "08"}} pt={5} maxWidth="70em" margin="auto">
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
         <IconButton
           size={"md"}
