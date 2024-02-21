@@ -28,7 +28,7 @@ const links = [
   {
     name: "Writeup",
     route:
-      "https://docs.google.com/document/d/1a3IPTkuyCA8v5aYruh4ii17F2IFCho5rlMZm2WMboHA/edit?usp=sharing",
+      "https://married-flare-75b.notion.site/Hack-The-North-2024-Frontend-Developer-Challenge-Writeup-d0c8c3dc1bbb463a9aab4a782bb21850?pvs=4",
   },
 ];
 
