@@ -92,7 +92,11 @@ function EventList() {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             bg="gray.200"
+            textColor={"black"}
           ></Input>
+          <Box>
+            
+          </Box>
         </motion.div>
         <Flex
           flexDirection={{ base: "column", sm: "column", md: "row" }}
